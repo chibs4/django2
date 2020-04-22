@@ -21,12 +21,13 @@ from news.views import index_handler, blog_handler, photo_gallery_handler, post_
     error_404_handler,robots_handler,header_handler
 
 urlpatterns = [
-                  path('index/', index_handler),
+                  path('', index_handler),
                   path('blog/', blog_handler),
                   path('photo-gallery/', photo_gallery_handler),
                   path('post/', post_handler),
                   path('contact-us/', contact_us_handler),
                   path('error-404/', error_404_handler),
+path('summernote/', include('django_summernote.urls')),
                   path('admin/', admin.site.urls),
                   path('robots.txt/',robots_handler),
                   path('header/',header_handler)
@@ -34,10 +35,8 @@ urlpatterns = [
 
 if settings.DEBUG:
     import debug_toolbar
-    urlpatterns = [
-        path('__debug__/', include(debug_toolbar.urls)),
+    urlpatterns += [path('__debug__/', include(debug_toolbar.urls))]
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
-        # For django versions before 2.0:
-        # url(r'^__debug__/', include(debug_toolbar.urls)),
 
-    ] + urlpatterns
+

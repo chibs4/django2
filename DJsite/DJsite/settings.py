@@ -28,6 +28,8 @@ ALLOWED_HOSTS = ['127.0.0.1']
 
 INTERNAL_IPS = ['127.0.0.1']
 
+X_FRAME_OPTIONS = 'SAMEORIGIN'
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -37,9 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig',
     'news.apps.NewsConfig',
     'debug_toolbar',
+    'django_summernote'
 
 
 ]
@@ -122,3 +124,9 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+
