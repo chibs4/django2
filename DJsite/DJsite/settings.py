@@ -24,7 +24,9 @@ SECRET_KEY = 'h^r7w99@@b40l&*$o+1k_mmhjw!_(z*qw%74%g&9c_g)zk$=gg'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['127.0.0.1']
+
+INTERNAL_IPS = ['127.0.0.1']
 
 # Application definition
 
@@ -35,13 +37,18 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'polls.apps.PollsConfig'
+    'polls.apps.PollsConfig',
+    'news.apps.NewsConfig',
+    'debug_toolbar',
+
+
 ]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
