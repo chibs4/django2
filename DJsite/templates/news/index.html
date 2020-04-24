@@ -27,160 +27,29 @@
                         <div class="composs-panel-inner">
 
                             <div class="composs-blog-list lets-do-1">
-
+                                {%for article in page_obj %}
                                 <div class="item">
                                     <div class="item-header">
                                         <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static 'images\photos\image-11.jpg' %}" alt=""></a>
+                                        <a href="post.html"><img src="{{article.main_image.url}}" alt=""></a>
                                     </div>
                                     <div class="item-content">
-                                        <h2><a href="post.html">4 Shocking Things From Civil War That You Won't See in
-                                            the Movie</a></h2>
+                                        <h2><a href="{% url 'post' article.slug %}">{{article.name}}</a></h2>
                                         <span class="item-meta">
 													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
+                                                            class="material-icons">access_time</i>{{article.pub_date}}</span>
 												</span>
-                                        <p>With the recent trailers and more plot points about Captain America: Civil
-                                            War being made known, it is becoming more and more likely that Civil War is
-                                            going to be a different...</p>
+                                        <p>{{article.short_description|safe}}</p>
                                     </div>
                                 </div>
+                                {% endfor %}
 
-                                 <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static 'images\photos\image-21.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">4 Shocking Things From Civil War That You Won't See in
-                                            the Movie</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>With the recent trailers and more plot points about Captain America: Civil
-                                            War being made known, it is becoming more and more likely that Civil War is
-                                            going to be a different...</p>
-                                    </div>
-                                </div>
 
-                                <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static 'images\photos\image-12.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">Horror Icon Angus Scrimm Passes Away; The Tall Man
-                                            Remains Immortal</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>Angus Scrimm passed away on Saturday at the age of 89. He was best known for
-                                            portraying The Tall Man in one of my favorite cult horror movie series of
-                                            all-time...</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static 'images\photos\image-13.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">We Almost Saw David Bowie In The Marvel Cinematic
-                                            Universe</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>As far as hammer blows to the cultural brain stem go, the death of David
-                                            Bowie on January 10 was particularly brutal. One of the very few true icons
-                                            of popular culture...</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static '\images\photos\image-14.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">Horror Icon Angus Scrimm Passes Away; The Tall Man
-                                            Remains Immortal</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>Angus Scrimm passed away on Saturday at the age of 89. He was best known for
-                                            portraying The Tall Man in one of my favorite cult horror movie series of
-                                            all-time...</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static '\images\photos\image-15.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">We Almost Saw David Bowie In The Marvel Cinematic
-                                            Universe</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>As far as hammer blows to the cultural brain stem go, the death of David
-                                            Bowie on January 10 was particularly brutal. One of the very few true icons
-                                            of popular culture...</p>
-                                    </div>
-                                </div>
-
-                                <div class="item">
-                                    <div class="item-header">
-                                        <a href="#" class="img-read-later-button">Read later</a>
-                                        <a href="post.html"><img src="{% static 'images\photos\image-16.jpg' %}" alt=""></a>
-                                    </div>
-                                    <div class="item-content">
-                                        <h2><a href="post.html">Did You Spot This Fun Indiana Jones Easter Egg In Star
-                                            Wars 7: The Force Awakens?</a></h2>
-                                        <span class="item-meta">
-													<span class="item-meta-item"><i
-                                                            class="material-icons">access_time</i>January 12, 2015</span>
-													<a href="post.html#comments" class="item-meta-item"><i
-                                                            class="material-icons">chat_bubble_outline</i>35</a>
-												</span>
-                                        <p>As far as hammer blows to the cultural brain stem go, the death of David
-                                            Bowie on January 10 was particularly brutal. One of the very few true icons
-                                            of popular culture...</p>
-                                    </div>
-                                </div>
 
                             </div>
 
                         </div>
-
-                        <div class="composs-panel-pager">
-                            <a class="prev page-numbers" href="#"><i class="fa fa-angle-double-left"></i>Previous</a>
-                            <a class="page-numbers" href="#">1</a>
-                            <span class="page-numbers current">2</span>
-                            <a class="page-numbers" href="#">3</a>
-                            <a class="page-numbers" href="#">4</a>
-                            <a class="page-numbers" href="#">5</a>
-                            <a class="next page-numbers" href="#">Next<i class="fa fa-angle-double-right"></i></a>
-                        </div>
+                        {% include 'chunks/pagination.html'%}
 
                         <!-- END .composs-panel -->
                     </div>
