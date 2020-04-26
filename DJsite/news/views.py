@@ -1,6 +1,9 @@
+from django.views.generic import TemplateView, ListView
+from django.contrib import messages
 from django.shortcuts import render
 from .models import Article, Category, Tag, Comment
 from django.core.paginator import Paginator
+from .forms import CommentForm
 
 
 def index_handler(request):
@@ -17,38 +20,56 @@ def index_handler(request):
     return render(request, 'news/index.html', context)
 
 
-def photo_gallery_handler(request):
-    context = {}
-    return render(request, 'photo-gallery.html', context)
+class IndexView(TemplateView):
+    template_name = 'news/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['last_articles'] = Article.objects.all().order_by('-pub_date')[:6].prefetch_related('categories')
+        return context
 
 
-def contact_us_handler(request):
-    context = {'h1': 'Articles Database'}
-    return render(request, 'news/contact-us.html', context)
+class PhotoGalleryView(TemplateView):
+
+    tamplate_name =  'photo-gallery.html'
+
+class ContactView(TemplateView):
+
+    tamplate_name = 'news/contact-us.html'
 
 
 def post_handler(request, slug):
     article = Article.objects.get(slug=slug)
+    context = {'article': article}
     if request.method == 'POST':
-        data = {x[0]: x[1] for x in request.POST.items()}
-        data.pop('csrfmiddlewaretoken')
-        data.pop('submit')
-        data['article'] = article
-        Comment.objects.create(**data)
-    context = {'article' : article}
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            data = form.cleaned_data
+            data['article'] = article
+            Comment.objects.create(**data)
+        else:
+            messages.add_message(request, messages.INFO, 'Error in FORM fields')
+    else:
+        form =CommentForm()
+    context['form'] = form
     return render(request, 'news/post.html', context)
 
+class CategoryListView(ListView):
+    template_name = 'news/category.html'
+    model = Article
+    ordering = '-pub_date'
+    paginate_by = 5
 
 
 
-def error_404_handler(request):
-    context = {}
-    return render(request, 'news/error-404.html', status=404)
+class Error404View(TemplateView):
 
+    tamplate_name = 'news/error-404.html'
 
-def robots_handler(request):
-    context = {}
-    return render(request, 'news/robots.txt', context, content_type='text/plain')
+class RobotsView(TemplateView):
+
+    tamplate_name = 'news/robots.html'
+    content_type = 'text/plain'
 
 
 def category_handler(request, slug):
@@ -61,8 +82,4 @@ def category_handler(request, slug):
                'slug':slug}
     return render(request, 'news/category.html', context)
 
-# def header_handler(request,slug):
-#     cat_list = Category.objects.annotate\
-#         (count=Count('article')).order_by('count')[:5]
-#     context = {'categories': cat_list}
-#     return render(request, 'chunks/header.html',context)
+

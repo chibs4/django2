@@ -17,21 +17,21 @@ from django.contrib import admin
 from django.urls import path,include
 from django.conf.urls.static import static
 from django.conf import settings
-from news.views import index_handler, photo_gallery_handler, post_handler, contact_us_handler, \
-    error_404_handler,robots_handler,category_handler
+from news.views import index_handler, PhotoGalleryView, post_handler, ContactView, \
+    Error404View,RobotsView,CategoryListView
 
 urlpatterns = [
                   path('', index_handler,name = 'homepage'),
-                  path('category/<slug>',category_handler,name = 'category'),
-                  path('photo-gallery/', photo_gallery_handler),
+                  path('category/<slug>',CategoryListView.as_view(),name = 'category'),
+                  path('photo-gallery/', PhotoGalleryView.as_view() ),
                   path('post/<slug>', post_handler, name = 'post'),
-                  path('contact-us/', contact_us_handler,name = 'contact-us'),
-                  path('error-404/', error_404_handler),
+                  path('contact-us/', ContactView.as_view(), name = 'contact-us'),
+                  path('error-404/', Error404View.as_view()),
 
 
                   path('summernote/', include('django_summernote.urls')),
                   path('admin/', admin.site.urls),
-                  path('robots.txt/',robots_handler),
+                  path('robots.txt/',RobotsView.as_view()),
               ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

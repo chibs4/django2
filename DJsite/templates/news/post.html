@@ -169,42 +169,50 @@
                                                     <div class="comment-info">
                                                         <strong>Your data will be safe!</strong>
                                                         <span>Your e-mail address will not be published. Also other data will not be shared with third person.</span>
-                                                    </div>
-                                                    <div class="alert-message ot-shortcode-alert-message alert-green">
-                                                        <strong>Success! This a success message</strong>
-                                                    </div>
-                                                    <div class="alert-message ot-shortcode-alert-message alert-red">
-                                                        <strong>Error! This an error message</strong>
-                                                    </div>
-                                                    <div class="alert-message ot-shortcode-alert-message">
-                                                        <strong>Warning! This a warning message</strong>
-                                                    </div>
+
+
+
+                                                    {% if form.non_field_errors %}
+                                                        {% for error in  form.non_field_errors  %}
+                                                        <strong>{{error}}</strong>
+                                                    {% endfor %}
+                                                    {% endif %}
                                                     <div class="contact-form-content">
                                                         <p class="contact-form-user">
                                                             <label class="label-input">
+                                                                {{form.name.errors}}
                                                                 <span>Nickname<i class="required">*</i></span>
                                                                 <input type="text" placeholder="Nickname"
-                                                                       name="name" value="">
+                                                                       name="name"
+                                                                       {% if form.name.value %}
+                                                                       value="{{form.name.value}}">
+                                                                {% endif %}
                                                             </label>
                                                         </p>
                                                         <p class="contact-form-email">
                                                             <label class="label-input">
+                                                                {{form.email.errors}}
                                                                 <span>E-mail<i class="required">*</i></span>
                                                                 <input type="email" placeholder="E-mail" name="email"
-                                                                       value="">
+                                                                       {% if form.email.value %}
+                                                                       value="{{form.email.value}}">
+                                                                {% endif %}
+
                                                             </label>
                                                         </p>
                                                         <p class="contact-form-comment">
                                                             <label class="label-input">
+                                                                {{form.comment.errors}}
                                                                 <span>Comment text<i class="required">*</i></span>
                                                                 <textarea name="comment"
-                                                                          placeholder="Comment text"></textarea>
+                                                                          placeholder="Comment text">{% if form.comment.value %}{{form.comment.value}}{% endif %}</textarea>
                                                             </label>
                                                         </p>
                                                         <p class="form-submit">
                                                             <input name="submit" type="submit" id="submit"
                                                                    class="submit button" value="Post a Comment">
                                                         </p>
+                                                    </div>
                                                     </div>
                                                 </form>
 
